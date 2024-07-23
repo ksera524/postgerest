@@ -29,6 +29,6 @@ spec:
             - name: PGRST_DB_SCHEMA
               value: "hippo"
             - name: PGRST_DB_ANON_ROLE
-              value: "web_anon"
+              value: "hippo"
             - name: PGRST_SERVER_PROXY_URI
               value: "http://localhost:4000"
