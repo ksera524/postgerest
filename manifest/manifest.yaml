@@ -27,7 +27,7 @@ spec:
                   name: postgre
                   key: uri
             - name: PGRST_DB_SCHEMA
-              value: "sandbox"
+              value: "hippo"
             - name: PGRST_DB_ANON_ROLE
               value: "web_anon"
             - name: PGRST_SERVER_PROXY_URI
