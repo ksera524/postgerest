@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
   const handleClick = async () => {
     try {
-      const response = await fetch(`http://postgrest-be-service:3000/${search}`);
+      const response = await fetch(`http://localhost:30008/${search}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
