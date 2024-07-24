@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
   const handleClick = async () => {
     try {
-      const response = await fetch(`http://192.168.0.9/:30008/${search}`);
+      const response = await fetch(`http://192.168.0.9:30008/${search}`);
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
