@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: postgrest
-        image: qroksera.com/sandbox/postgrest-fe:202407240110
+        image: qroksera.com/sandbox/postgrest-fe:202407240113
         ports:
         - containerPort: 80
 ---
