@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Table } from "@yamada-ui/table"
-import { Button, Input} from "@yamada-ui/react"
-
+import { Button, Input } from "@yamada-ui/react"
 
 // APIから取得するデータの型を定義
 type DataItem = {
@@ -21,7 +20,7 @@ const App: React.FC = () => {
     const sampleItem = data[0];
     return Object.keys(sampleItem).map(key => ({
       header: key,  // データのキーをヘッダー名として使用
-      accessorKey: key as keyof DataItem // データのキーをアクセサーキーとして使用
+      accessorKey: key // データのキーをアクセサーキーとして使用
     }));
   }, [data]);
 
@@ -30,21 +29,25 @@ const App: React.FC = () => {
   }
 
   const handleClick = async () => {
-    const response = await fetch(`http://localhost:3000/${search}`);
-    if (!response.ok) {
-      setError(`Failed to fetch: ${response.statusText}`);
+    try {
+      const response = await fetch(`http://localhost:3000/${search}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch: ${response.statusText}`);
+      }
+      const result: DataItem[] = await response.json();
+      setData(result);
+      setError(null); // 成功時にエラーをリセット
+    } catch (err) {
+      setError((err as Error).message);
     }
-    const result: DataItem[] = await response.json();
-    setData(result);
   }
-
-  if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
       <h1>Data from PostgREST</h1>
       <Input placeholder="table name" value={search} onChange={handleChange} />
-      <Button colorScheme="primary" variant="solid" onClick={handleClick}>button</Button>
+      <Button colorScheme="primary" variant="solid" onClick={handleClick}>Fetch Data</Button>
+      {error && <div style={{ color: 'red' }}>Error: {error}</div>}
       <Table columns={columns} data={data} />
     </div>
   );
